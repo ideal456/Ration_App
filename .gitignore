@@ -1,0 +1,20 @@
+# Node.js dependencies
+backend/node_modules/
+node_modules/
+npm-debug.log
+
+# Environment variables
+backend/.env
+.env
+
+# MacOS/Windows hidden files
+.DS_Store
+Thumbs.db
+
+# Any IDE specific folders
+.vscode/
+.idea/
+
+# Potentially large data files (Uncomment if you don't want to push these)
+# phh_list_files/
+# Ayy_data_files/

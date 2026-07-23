@@ -1,0 +1,303 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0141)https://nfsa.up.gov.in/Food/citizen/ReportRegidWise.aspx?val=NSMxOTEjUiMwMDE0MjcjMDQwMjQ5IzEwMDEwMDcwMDEwNiNBTlQjMDkxOTEwMDk3MDE5NTg5NQ%3d%3d -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link href="./Ayy_data_files/bootstrap.min.css" rel="stylesheet">
+    <script src="./Ayy_data_files/jquery-3.6.4.min.js.download"></script>
+    <script src="./Ayy_data_files/LogoutTimeUpdate.js.download" type="text/javascript"></script>
+    <link href="./Ayy_data_files/dataTables.bootstrap4.min.css" rel="stylesheet"><link href="./Ayy_data_files/buttons.dataTables.min.css" rel="stylesheet"><link href="./Ayy_data_files/newheadfoot.css" rel="stylesheet"><title>
+	Rationcard Digitization
+</title>
+     <script type="text/javascript">
+         $(document).ready(function () {
+
+             var dtTable = $('#tbldata').DataTable(
+                 {
+                     dom: '<"top"<"left-col"l><"center-col"B><"right-col"f>>rtip',
+                     paging: true,
+                     order: [[1, 'asc']],
+                     columnDefs: [{
+                         targets: [0],
+                         orderable: false,
+                     }],
+                     orderCellsTop: true,
+
+                     buttons: [
+                         {
+                             extend: 'excelHtml5',
+                             className: 'btn btn-info',
+                             text: 'Download <i class="far fa-file-excel"></i>  ',
+                             title: 'NFSA Member List',
+                             footer: true,
+                             exportoptions: {
+                                 header: true,
+                                 footer: true
+                             }
+                         }
+                     ]
+                     , pagingType: 'full_numbers',
+                     pagelength: 76,
+                     lengthMenu: [
+                         [75, 30, 15, -1],
+                         ['75 rows', '30 rows', '15 rows', 'Show all']
+                     ],
+
+
+                 });
+             dtTable.on('order.dt search.dt', function () {
+                 dtTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+                     cell.innerHTML = i + 1;
+                 });
+             }).draw();
+         });
+
+     </script>
+
+
+    <style type="text/css">
+            .style1
+    {
+        font-size: 10px;
+    }
+
+    .footer-bottom {
+
+    right: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    padding:0rem !important;
+    background-color: #efefef !important;
+    text-align: center !important;
+    font-weight: 600;
+}
+
+   .footer-bottom  p {
+  margin-top: 0;
+    margin-bottom: 0rem;
+    font-size: 14px;
+    padding: 10px;
+}
+
+        .style2 {
+            color: #FF0000;
+            font-weight: bold;
+        }
+
+        .style3 {
+            color: #000000;
+            font-size:12px;
+        }
+
+        .style4 {
+            font-size: small;
+            color: #336600;
+        }
+
+        @media print {
+            Div.a {
+                display: none
+            }
+        }
+
+        .mainheadrtxt {
+
+                margin-top: 0px;
+    font-size: 20px;
+    line-height: 45px;
+        }
+
+        .dataTables_length {
+
+                float: left;
+        }
+
+        div.dt-buttons {
+    float: left;
+    margin-left: 11px;
+}
+    </style>
+
+
+</head>
+<body style="text-align: center">
+    <form method="post" action="https://nfsa.up.gov.in/Food/citizen/ReportRegidWise.aspx?val=NSMxOTEjUiMwMDE0MjcjMDQwMjQ5IzEwMDEwMDcwMDEwNiNBTlQjMDkxOTEwMDk3MDE5NTg5NQ%3d%3d" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__VIEWSTATEFIELDCOUNT" id="__VIEWSTATEFIELDCOUNT" value="3">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKMTU3NTk2NjI0Nw9kFgICAw9kFgQCAg8PFgQeBFRleHQFOj4g4KS44KS+4KSC4KSW4KWN4KSv4KS/4KSV4KWAIOCkquCkguCkmuCkvuCkr+CkpCDgpLXgpL7gpLAeC05hdmlnYXRlVXJsBWVSZXBvcnRCbG9ja1dpc2UuYXNweD9WYWw9TlNNeE9URWpVaU13TURFME1qY2pNRFF3TWpRNUl6RXdNREV3TURjd01ERXdOaU5CVGxRak1Ea3hPVEV3TURrM01ERTVOVGc1TlE9PWRkAgMPFgIeCWlubmVyaHRtbAXyVzx0YWJsZSBhbGlnbj0nY2VudGVyJyBjbGFzcz0ndGFibGUgdGFibGUtc3RyaXBlZCB0YWJsZS1ib3JkZXJlZCcgIGlkPSd0YmxkYXRhJz48dGhlYWQ+PHRyIHN0eWxlPSdmb250LXNpemU6IDExcHQ7Jz48dGQgIGNvbHNwYW49JzE0JyBzdHlsZT0ndGV4dC1hbGlnbjogY2VudGVyOyc+PGI+4KSc4KS/4KSy4KS+PC9iPiA6IEF6YW1nYXJoLCA8Yj7gpKzgpY3gpLLgpL7gpJU8L2I+IDogVEFSV0FOLDxiPuCkl+CljeCksOCkvuCkriDgpKrgpILgpJrgpL7gpK/gpKQ8L2I+OiBLVURIQVBBUiAsIDxiPuCkpuClgeCkleCkvuCkqOCkpuCkvuCksCDgpJXgpL4g4KSo4KS+4KSuPC9iPiA6IE1BTlRBIFlBREFWLCAgPGI+4KSm4KWB4KSV4KS+4KSoIOCkuOCkguCkluCljeCkr+CkvjwvYj4gOiAyMDYxMjA5OSw8Yj4g4KSV4KS+4KSw4KWN4KShIOCkleCkviDgpKrgpY3gpLDgpJXgpL7gpLA8L2I+IDog4KSF4KSo4KWN4KSk4KWN4KSv4KWL4KSm4KSvIDwvdGQ+PC90cj48dHIgc3R5bGU9J2ZvbnQtd2VpZ2h0OiBib2xkZXI7IGJhY2tncm91bmQtY29sb3I6ICNkOGQ3ZDc2MTsnPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogY2VudGVyOyc+4KSV4KWN4KSwLjwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBjZW50ZXI7Jz7gpKHgpL/gpJzgpL/gpJ/gpL7gpIfgpJzgpY3gpKEg4KSw4KS+4KS24KSoIOCkleCkvuCksOCljeCkoSDgpLjgpILgpJbgpY3gpK/gpL48L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogY2VudGVyOyc+4KSn4KS+4KSw4KSVIOCkleCkviDgpKjgpL7gpK48L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogY2VudGVyOyc+4KSq4KS/4KSk4KS+L+CkquCkpOCkvyDgpJXgpL4g4KSo4KS+4KSuPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGNlbnRlcjsnPuCkruCkvuCkpOCkviDgpJXgpL4g4KSo4KS+4KSuPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGNlbnRlcjsnPuCkleClgeCksiDgpK/gpYLgpKjgpL/gpJ88L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogY2VudGVyOyc+4KSw4KS+4KS24KSoIOCkleCkvuCksOCljeCkoSDgpJzgpL7gpLDgpYAgKCDgpKHgpL/gpJzgpL/gpJ/gpLIg4KS54KS44KWN4KSk4KS+4KSV4KWN4KS34KSwICkg4KSV4KSw4KSo4KWHIOCkleClgCDgpKTgpL/gpKXgpL8gPC90ZD48L3RyPjwvdGhlYWQ+PHRib2R5Pjx0ciA+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBjZW50ZXI7Jz4xLjwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBjZW50ZXI7Jz4mbmJzcDsyMVhYWFhYWDM4ODQ8L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogbGVmdDsnPiZuYnNwO+CkuOClgeCkqOClgOCkpOCkviDgpK/gpL7gpKbgpLU8L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogbGVmdDsnPiZuYnNwO+CktuCljeCksOClgCDgpLDgpL7gpK4g4KSv4KS+4KSm4KS1PC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGxlZnQ7Jz4mbmJzcDvgpIbgpLbgpL4g4KSm4KWH4KS14KWAPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IHJpZ2h0Oyc+Jm5ic3A7MTwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBjZW50ZXI7Jz4mbmJzcDswNS8xMC8yMDIxPC90ZD48L3RyPjx0ciA+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBjZW50ZXI7Jz4yLjwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBjZW50ZXI7Jz4mbmJzcDsyMVhYWFhYWDY4ODQ8L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogbGVmdDsnPiZuYnNwO+CkuOCkteCkv+CkpOCkviDgpKbgpYfgpLXgpYA8L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogbGVmdDsnPiZuYnNwO+CkheCksOCljeCknOClgeCkqDwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBsZWZ0Oyc+Jm5ic3A74KS44KWB4KSw4KSc4KWAPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IHJpZ2h0Oyc+Jm5ic3A7NzwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBjZW50ZXI7Jz4mbmJzcDswMy8wNS8yMDI2PC90ZD48L3RyPjx0ciA+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBjZW50ZXI7Jz4zLjwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBjZW50ZXI7Jz4mbmJzcDsyMVhYWFhYWDY5Njk8L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogbGVmdDsnPiZuYnNwO+CktuCkvuCksOCkpuCkviDgpKzgpKjgpLXgpL7gpLjgpYA8L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogbGVmdDsnPiZuYnNwO+CktuCkv+CkteCkqOCkvuCkpTwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBsZWZ0Oyc+Jm5ic3A74KSV4KWN4KS44KWA4KWbPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IHJpZ2h0Oyc+Jm5ic3A7MzwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBjZW50ZXI7Jz4mbmJzcDswMy8wNS8yMDI2PC90ZD48L3RyPjx0ciA+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBjZW50ZXI7Jz40LjwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBjZW50ZXI7Jz4mbmJzcDsyMVhYWFhYWDY5NzI8L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogbGVmdDsnPiZuYnNwO+CkluClgOCksOCkvjwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBsZWZ0Oyc+Jm5ic3A74KSs4KSy4KS/4KS54KS+4KSw4KWAPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGxlZnQ7Jz4mbmJzcDvgpJXgpY3gpLjgpYDgpZs8L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogcmlnaHQ7Jz4mbmJzcDs0PC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGNlbnRlcjsnPiZuYnNwOzAzLzA1LzIwMjY8L3RkPjwvdHI+PHRyID48dGQgc3R5bGU9J3RleHQtYWxpZ246IGNlbnRlcjsnPjUuPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGNlbnRlcjsnPiZuYnNwOzIxWFhYWFhYNDY0MzwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBsZWZ0Oyc+Jm5ic3A74KSs4KSa4KS/4KSv4KS+PC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGxlZnQ7Jz4mbmJzcDvgpK7gpILgpJfgpLI8L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogbGVmdDsnPiZuYnNwO+CktuCljeCkr+CkvuCkruCkpuCliOCkiDwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiByaWdodDsnPiZuYnNwOzE8L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogY2VudGVyOyc+Jm5ic3A7MDQvMDkvMjAyNDwvdGQ+PC90cj48dHIgPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogY2VudGVyOyc+Ni48L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogY2VudGVyOyc+Jm5ic3A7MjFYWFhYWFg4MzEyPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGxlZnQ7Jz4mbmJzcDvgpJrgpK7gpY3gpKrgpL4g4KSm4KWH4KS14KWAPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGxlZnQ7Jz4mbmJzcDvgpIXgpJrgpY3gpJvgpYfgpLLgpL7gpLI8L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogbGVmdDsnPiZuYnNwO+CkleCljeCkuOClgOClmzwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiByaWdodDsnPiZuYnNwOzE8L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogY2VudGVyOyc+Jm5ic3A7MDQvMDkvMjAyNDwvdGQ+PC90cj48dHIgPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogY2VudGVyOyc+Ny48L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogY2VudGVyOyc+Jm5ic3A7MjFYWFhYWFgzNDA5PC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGxlZnQ7Jz4mbmJzcDvgpJXgpYzgpLbgpL/gpLLgpY3gpK/gpL4g4KSm4KWH4KS14KWAPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGxlZnQ7Jz4mbmJzcDvgpLDgpL7gpJzgpYfgpLbgpLDgpL7gpK48L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogbGVmdDsnPiZuYnNwO+CkruClgeCkluCkv+Ckr+CkvjwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiByaWdodDsnPiZuYnNwOzU8L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogY2VudGVyOyc+Jm5ic3A7MDQvMDkvMjAyNDwvdGQ+PC90cj48dHIgPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogY2VudGVyOyc+OC48L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogY2VudGVyOyc+Jm5ic3A7MjFYWFhYWFgzNDEzPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGxlZnQ7Jz4mbmJzcDvgpLbgpL7gpKjgpY3gpKTgpYAg4KSm4KWH4KS14KWAPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGxlZnQ7Jz4mbmJzcDvgpKbgpYHgpJbgpYA8L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogbGVmdDsnPiZuYnNwO+Ckl+Cli+CkquCkvuCksuCkviDgpKbgpYfgpLXgpYA8L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogcmlnaHQ7Jz4mbmJzcDszPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGNlbnRlcjsnPiZuYnNwOzA0LzA5LzIwMjQ8L3RkPjwvdHI+PHRyID48dGQgc3R5bGU9J3RleHQtYWxpZ246IGNlbnRlcjsnPjkuPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGNlbnRlcjsnPiZuYnNwOzIxWFhYWFhYMDA1NDwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBsZWZ0Oyc+Jm5ic3A74KS44KWB4KSw4KS44KSk4KWAPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGxlZnQ7Jz4mbmJzcDvgpK3gpYvgpLLgpL48L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogbGVmdDsnPiZuYnNwO+CkuOCkruClgeCkqOCksOClgDwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiByaWdodDsnPiZuYnNwOzU8L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogY2VudGVyOyc+Jm5ic3A7MTcvMDMvMjAyNjwvdGQ+PC90cj48dHIgPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogY2VudGVyOyc+MTAuPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGNlbnRlcjsnPiZuYnNwOzIxWFhYWFhYMzQwODwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBsZWZ0Oyc+Jm5ic3A74KSH4KSw4KS+4KS14KSk4KWAIOCkrOCkqOCkteCkvuCkuOClgCA8L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogbGVmdDsnPiZuYnNwO+CksOCkvuCkp+ClhzwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBsZWZ0Oyc+Jm5ic3A74KSV4KWN4KS44KWA4KWbPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IHJpZ2h0Oyc+Jm5ic3A7NDwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBjZW50ZXI7">
+<input type="hidden" name="__VIEWSTATE1" id="__VIEWSTATE1" value="Jz4mbmJzcDsxNy8wMy8yMDI2PC90ZD48L3RyPjx0ciA+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBjZW50ZXI7Jz4xMS48L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogY2VudGVyOyc+Jm5ic3A7MjFYWFhYWFg3OTUzPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGxlZnQ7Jz4mbmJzcDvgpK7gpYHgpJbgpL/gpK/gpL48L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogbGVmdDsnPiZuYnNwO+Ckq+ClguCksuCkmuCkqOCljeCkpjwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBsZWZ0Oyc+Jm5ic3A74KSF4KS44KSw4KSr4KWAPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IHJpZ2h0Oyc+Jm5ic3A7MjwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBjZW50ZXI7Jz4mbmJzcDsxOS8xMC8yMDI0PC90ZD48L3RyPjx0ciA+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBjZW50ZXI7Jz4xMi48L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogY2VudGVyOyc+Jm5ic3A7MjFYWFhYWFg4MjE2PC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGxlZnQ7Jz4mbmJzcDvgpJfgpYHgpLLgpIfgpJrgpYA8L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogbGVmdDsnPiZuYnNwO+CksOCkvuCkruCkleCksOCkqDwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBsZWZ0Oyc+Jm5ic3A74KS24KWB4KSt4KS+4KS14KSk4KWAPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IHJpZ2h0Oyc+Jm5ic3A7NDwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBjZW50ZXI7Jz4mbmJzcDsxOS8xMC8yMDI0PC90ZD48L3RyPjx0ciA+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBjZW50ZXI7Jz4xMy48L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogY2VudGVyOyc+Jm5ic3A7MjFYWFhYWFgxNzUyPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGxlZnQ7Jz4mbmJzcDvgpK7gpYDgpLDgpL4g4KSm4KWH4KS14KWAPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGxlZnQ7Jz4mbmJzcDvgpLDgpL7gpK7gpK7gpL/gpLLgpKg8L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogbGVmdDsnPiZuYnNwO+CkpOCkquClh+CkuOCksOClgDwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiByaWdodDsnPiZuYnNwOzQ8L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogY2VudGVyOyc+Jm5ic3A7MTkvMTAvMjAyNDwvdGQ+PC90cj48dHIgPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogY2VudGVyOyc+MTQuPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGNlbnRlcjsnPiZuYnNwOzIxWFhYWFhYMTc1MzwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBsZWZ0Oyc+Jm5ic3A74KS44KWB4KSt4KS+4KS14KSk4KWAIOCkpuClh+CkteClgDwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBsZWZ0Oyc+Jm5ic3A74KSw4KS+4KSuIOCkquCljeCksOCkuOCkvuCkpiDgpLDgpL7gpK48L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogbGVmdDsnPiZuYnNwO+CkmuCkqOCksOClgDwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiByaWdodDsnPiZuYnNwOzY8L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogY2VudGVyOyc+Jm5ic3A7MTkvMTAvMjAyNDwvdGQ+PC90cj48dHIgPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogY2VudGVyOyc+MTUuPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGNlbnRlcjsnPiZuYnNwOzIxWFhYWFhYODMxMTwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBsZWZ0Oyc+Jm5ic3A74KSa4KSu4KWN4KSq4KS+IOCkpuClh+CkteClgCA8L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogbGVmdDsnPiZuYnNwO+CksuCli+CkleCkiDwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBsZWZ0Oyc+Jm5ic3A74KSo4KS+4KSX4KSw4KSl4KWAPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IHJpZ2h0Oyc+Jm5ic3A7NDwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBjZW50ZXI7Jz4mbmJzcDsxOS8xMC8yMDI0PC90ZD48L3RyPjx0ciA+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBjZW50ZXI7Jz4xNi48L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogY2VudGVyOyc+Jm5ic3A7MjFYWFhYWFgzNDA1PC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGxlZnQ7Jz4mbmJzcDvgpLLgpYDgpLLgpL7gpLXgpKTgpYAg4KSm4KWH4KS14KWAIDwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBsZWZ0Oyc+Jm5ic3A74KSq4KS+4KSW4KSC4KSh4KWAPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGxlZnQ7Jz4mbmJzcDvgpJfgpYDgpKTgpL48L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogcmlnaHQ7Jz4mbmJzcDs0PC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGNlbnRlcjsnPiZuYnNwOzE5LzEwLzIwMjQ8L3RkPjwvdHI+PHRyID48dGQgc3R5bGU9J3RleHQtYWxpZ246IGNlbnRlcjsnPjE3LjwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBjZW50ZXI7Jz4mbmJzcDsyMVhYWFhYWDM0MDY8L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogbGVmdDsnPiZuYnNwO+CkruCkvuCkqOCkpOClgCDgpKbgpYfgpLXgpYAgPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGxlZnQ7Jz4mbmJzcDvgpLjgpL/gpLDgpKrgpKQ8L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogbGVmdDsnPiZuYnNwO+CkleCljeCkuOClgOClmzwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiByaWdodDsnPiZuYnNwOzI8L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogY2VudGVyOyc+Jm5ic3A7MTkvMTAvMjAyNDwvdGQ+PC90cj48dHIgPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogY2VudGVyOyc+MTguPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGNlbnRlcjsnPiZuYnNwOzIxWFhYWFhYMzQwNzwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBsZWZ0Oyc+Jm5ic3A74KSm4KWB4KSw4KWN4KSX4KS+4KS14KSk4KWAIOCkpuClh+CkteClgCA8L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogbGVmdDsnPiZuYnNwO+CkpuClgeCkleCljeCkluClgDwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBsZWZ0Oyc+Jm5ic3A74KS44KSC4KSc4KS+4KSr4KWAPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IHJpZ2h0Oyc+Jm5ic3A7NzwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBjZW50ZXI7Jz4mbmJzcDsxOS8xMC8yMDI0PC90ZD48L3RyPjx0ciA+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBjZW50ZXI7Jz4xOS48L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogY2VudGVyOyc+Jm5ic3A7MjFYWFhYWFg2OTcwPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGxlZnQ7Jz4mbmJzcDvgpLbgpL7gpLDgpKbgpL4g4KSm4KWH4KS14KWAPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGxlZnQ7Jz4mbmJzcDvgpKzgpL7gpKzgpYHgpLDgpL7gpK48L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogbGVmdDsnPiZuYnNwO+Ckp+CkqOCkquCkpOCkv+Ckr+CkvjwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiByaWdodDsnPiZuYnNwOzc8L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogY2VudGVyOyc+Jm5ic3A7MTkvMTAvMjAyNDwvdGQ+PC90cj48dHIgPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogY2VudGVyOyc+MjAuPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGNlbnRlcjsnPiZuYnNwOzIxWFhYWFhYNjk3MTwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBsZWZ0Oyc+Jm5ic3A74KSH4KS44KWN4KSw4KS+4KS14KSk4KWAPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGxlZnQ7Jz4mbmJzcDvgpLngpILgpLjgpLDgpL7gpJw8L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogbGVmdDsnPiZuYnNwO+CkruClgeCkluCkqOCkvzwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiByaWdodDsnPiZuYnNwOzU8L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogY2VudGVyOyc+Jm5ic3A7MTkvMTAvMjAyNDwvdGQ+PC90cj48dHIgPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogY2VudGVyOyc+MjEuPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGNlbnRlcjsnPiZuYnNwOzIxWFhYWFhYNjk3MzwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBsZWZ0Oyc+Jm5ic3A74KSw4KSC4KSc4KWCPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGxlZnQ7Jz4mbmJzcDvgpJXgpK7gpLLgpYfgpLY8L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogbGVmdDsnPiZuYnNwO+CkleCkruCksuClgDwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiByaWdodDsnPiZuYnNwOzQ8L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogY2VudGVyOyc+Jm5ic3A7MTkvMTAvMjAyNDwvdGQ+PC90cj48dHIgPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogY2VudGVyOyc+MjIuPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGNlbnRlcjsnPiZuYnNwOzIxWFhYWFhYMTIxNzwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBsZWZ0Oyc+Jm5ic3A74KSJ4KS34KS+IOCkpuClh+CkteClgDwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBsZWZ0Oyc+Jm5ic3A74KSF4KSa4KWN4KSb4KWH4KSy4KS+4KSyPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGxlZnQ7Jz4mbmJzcDvgpJXgpY3gpLjgpYDgpZs8L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogcmlnaHQ7Jz4mbmJzcDs0PC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGNlbnRlcjsnPiZuYnNwOzE5LzEwLzIwMjQ8L3RkPjwvdHI+PHRyID48dGQgc3R5bGU9J3RleHQtYWxpZ246IGNlbnRlcjsnPjIzLjwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBjZW50ZXI7Jz4mbmJzcDsyMVhYWFhYWDM0MTA8L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogbGVmdDsnPiZuYnNwO+CkleCksOCljeCkruClgCDgpKbgpYfgpLXgpYA8L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogbGVmdDsnPiZuYnNwO+CkrOCkvuCkleClh+CksuCkvuCksjwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBsZWZ0Oyc+Jm5ic3A74KSV4KWN4KS44KWA4KWbPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IHJpZ2h0Oyc+Jm5ic3A7MTwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBjZW50ZXI7Jz4mbmJzcDsyNC8xMi8yMDE5PC90ZD48L3RyPjx0ciA+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBjZW50ZXI7Jz4yNC48L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogY2VudGVyOyc+Jm5ic3A7MjFYWFhYWFgzNDEyPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGxlZnQ7Jz4mbmJzcDvgpKjgpYLgpLDgpJzgpLngpL7gpIE8L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogbGVmdDsnPiZuYnNwO+Ck">
+<input type="hidden" name="__VIEWSTATE2" id="__VIEWSTATE2" value="sOCkueClgOCkrjwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBsZWZ0Oyc+Jm5ic3A74KS44KWM4KSw4KWC4KSoPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IHJpZ2h0Oyc+Jm5ic3A7MTwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBjZW50ZXI7Jz4mbmJzcDsyNC8xMi8yMDE5PC90ZD48L3RyPjx0ciA+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBjZW50ZXI7Jz4yNS48L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogY2VudGVyOyc+Jm5ic3A7MjFYWFhYWFg4MzMxPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGxlZnQ7Jz4mbmJzcDvgpLbgpL7gpILgpKTgpL88L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogbGVmdDsnPiZuYnNwO+CkleCkqOCljeCkpOCkvjwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBsZWZ0Oyc+Jm5ic3A74KSy4KWL4KS54KS/4KSv4KS+PC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IHJpZ2h0Oyc+Jm5ic3A7MzwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBjZW50ZXI7Jz4mbmJzcDsyOC8wMi8yMDI0PC90ZD48L3RyPjx0ciA+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBjZW50ZXI7Jz4yNi48L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogY2VudGVyOyc+Jm5ic3A7MjFYWFhYWFgzNDExPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGxlZnQ7Jz4mbmJzcDvgpJfgpKTgpL/gpK/gpL4g4KSm4KWH4KS14KWAIDwvdGQ+PHRkIHN0eWxlPSd0ZXh0LWFsaWduOiBsZWZ0Oyc+Jm5ic3A74KS44KWC4KSw4KSkPC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGxlZnQ7Jz4mbmJzcDvgpJXgpY3gpLjgpYDgpZs8L3RkPjx0ZCBzdHlsZT0ndGV4dC1hbGlnbjogcmlnaHQ7Jz4mbmJzcDs2PC90ZD48dGQgc3R5bGU9J3RleHQtYWxpZ246IGNlbnRlcjsnPiZuYnNwOzI5LzAxLzIwMjU8L3RkPjwvdHI+PC90Ym9keT48dGZvb3Q+PHRyPjx0ZCBjb2xzcGFuPSc3Jz48L3RkPjwvdHI+PC90Zm9vdD48L3RhYmxlPmRk66xn49XBVCVYQjrbEGoKtcZEmK0=">
+</div>
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="A49A514A">
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAALWW/Zfe4m/TsUkMIYc4J1F+Ot37oCEEXP3EjBFcbJhKKh3T9KbM8tYVDXe0QxCAtkz9kS9">
+</div>
+         
+<style type="text/css">
+ @-webkit-keyframes blinker {  
+  table { opacity: 1.0; }
+  to { opacity: 0.0; }
+
+}
+.css3-blink {
+  -webkit-animation-name: blinker;  
+  -webkit-animation-iteration-count: infinite;  
+  -webkit-animation-timing-function: cubic-bezier(1.0,0,0,1.0);
+  -webkit-animation-duration: 1s; 
+}
+.h4txt1 {
+           
+   line-height: 0px;
+  font-size: 21px;
+  font-weight: 600;
+  color: #878787;
+    }
+</style>
+<script type="text/javascript">
+    tday = new Array("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
+    tmonth = new Array("January", "February", "March", "April", "May", "June", "जुलाई ", "August", "September", "October", "November", "December");
+
+    function GetClock() {
+        var d = new Date();
+        var nday = d.getDay(), nmonth = d.getMonth(), ndate = d.getDate(), nyear = d.getYear();
+        if (nyear < 1000) nyear += 1900;
+        var nhour = d.getHours(), nmin = d.getMinutes(), nsec = d.getSeconds(), ap;
+
+        if (nhour == 0) { ap = " AM"; nhour = 12; }
+        else if (nhour < 12) { ap = " AM"; }
+        else if (nhour == 12) { ap = " PM"; }
+        else if (nhour > 12) { ap = " PM"; nhour -= 12; }
+
+        if (nmin <= 9) nmin = "0" + nmin;
+        if (nsec <= 9) nsec = "0" + nsec;
+
+        document.getElementById('clockbox').innerHTML = "" + tday[nday] + ", " + tmonth[nmonth] + " " + ndate + ", " + nyear + " " + nhour + ":" + nmin + ":" + nsec + ap + "";
+    }
+
+    window.onload = function () {
+        GetClock();
+        setInterval(GetClock, 1000);
+    }
+</script>
+
+<link href="./Ayy_data_files/font-awesome.min.css" rel="stylesheet">
+<section class="header">
+	
+	<div class="logo">
+		<ul class="ullogo">
+		<li>
+        <img src="./Ayy_data_files/logo.png" width="65">
+				 </li>
+			
+			<li><h2>खाद्य एवं रसद विभाग</h2>
+			<h4>उत्तर प्रदेश सरकार</h4>
+			
+			</li>
+		
+		</ul>
+	
+	</div>
+	
+	<div class="headtxt hidden-xs hidden-sm">
+		<ul>
+
+		
+			<li>
+				<span class="h4txt1">राशन कार्ड प्रबंधन प्रणाली</span></li>
+		
+
+            		
+				<li>
+				<span id="clockbox">Friday, May 22, 2026 4:44:23 PM</span></li>
+		</ul>
+	
+	</div>
+          
+	
+          
+	
+	
+        </section>
+
+
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="display:none;">
+    <tbody><tr>
+        <td valign="top">
+            <img id="FoodHeader_PublicNew_Image1" src="./Ayy_data_files/fcs2.jpg" style="width:100%;">
+        </td>
+    </tr>
+    <tr>
+        <td valign="top" style="text-transform: uppercase; color: #FFFF66; font-weight: bold; font-size: larger; text-align: center; background-color: #CC2813;">
+           <span class="css3-blink"></span> 
+        </td>
+    </tr>
+</tbody></table>
+
+
+    <div>
+        <table align="center" border="0" cellpadding="0" cellspacing="0" style="font-size: 10pt;width: 90%;font-family: Verdana">
+            
+   
+             <tbody><tr><td align="right">  
+          <div class="a">
+                   <a href="https://nfsa.up.gov.in/Food/citizen/ReportNikayWise.aspx?val=NSMxOTEjUiMwMDE0MjcjMDQwMjQ5IzEwMDEwMDcwMDEwNiNBTlQjMDkxOTEwMDk3MDE5NTg5NQ==" class="btn btn-primary">वापस</a>     <input type="submit" name="btnCancel" value="बंद करें" onclick="window.open(&#39;&#39;, &#39;_self&#39;).close();" id="btnCancel" class="btn btn-warning"></div>                                      </td></tr>
+             <tr><td style="width: 100%;">&nbsp;&nbsp;</td></tr>
+             <tr>
+                <td style="width: 100%;text-align: Left;font-weight: bold;">
+                     <div class="a">
+                    आप यहां है :
+                    <a href="https://nfsa.up.gov.in/Food/citizen/Default.aspx" style="color:#990033">मुख्य पृष्ठ</a>&nbsp;&gt;&nbsp;<a href="https://nfsa.up.gov.in/Food/citizen/ReportDistrictWise.aspx?val=NSMxOTEjUiMwMDE0MjcjMDQwMjQ5IzEwMDEwMDcwMDEwNiNBTlQjMDkxOTEwMDk3MDE5NTg5NQ==" style="color:#4795be;">सांख्यिकी क्षेत्र वार</a>
+                        &nbsp;<a id="Hl_urHere" href="https://nfsa.up.gov.in/Food/citizen/ReportBlockWise.aspx?Val=NSMxOTEjUiMwMDE0MjcjMDQwMjQ5IzEwMDEwMDcwMDEwNiNBTlQjMDkxOTEwMDk3MDE5NTg5NQ==" style="color:#4795BE;">&gt; सांख्यिकी पंचायत वार</a>
+                            &nbsp;&gt;&nbsp;<a href="https://nfsa.up.gov.in/Food/citizen/ReportNikayWise.aspx?val=NSMxOTEjUiMwMDE0MjcjMDQwMjQ5IzEwMDEwMDcwMDEwNiNBTlQjMDkxOTEwMDk3MDE5NTg5NQ==" style="color:#4795be;">सांख्यिकी दुकान वार</a>&nbsp;&gt;&nbsp;<span forecolor="#333333">सांख्यिकी कार्ड वार</span>   
+               </div>  </td>
+            </tr>
+            
+         
+            <tr>
+                <td style="width: 100%; height: 44px">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="table table-striped table-bordered">
+                            <tbody><tr>
+                                <td colspan="5">
+                                    <div>
+                                    <div style="float:none;"><h5>राष्ट्रीय खाद्य सुरक्षा अधिनियम(NFSA) की पात्रता सूची-गृहस्थी का विवरण</h5> </div>
+                                     <div style="float:right; margin-top: -30px;">(  21/05/2026 समय: 09:00 PM   तक की स्थिति )</div>
+                                        
+                                    </div>
+                                </td>
+                            </tr>                           
+                        </tbody></table>
+
+                </td>
+            </tr>
+            <tr>
+                <td id="tab" style="width: 100%"><div id="tbldata_wrapper" class="dataTables_wrapper dt-bootstrap4"><div class="top"><div class="left-col"><div class="dataTables_length" id="tbldata_length"><label>Show <select name="tbldata_length" aria-controls="tbldata" class="custom-select custom-select-sm form-control form-control-sm"><option value="75">75 rows</option><option value="30">30 rows</option><option value="15">15 rows</option><option value="-1">Show all</option></select> entries</label></div></div><div class="center-col"><div class="dt-buttons"></div></div><div class="right-col"><div id="tbldata_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="tbldata"></label></div></div></div><table align="center" class="table table-striped table-bordered dataTable" id="tbldata" aria-describedby="tbldata_info" style="width: 1372px;"><thead><tr style="font-size: 11pt;"><td colspan="14" style="text-align: center;" rowspan="1"><b>जिला</b> : Azamgarh, <b>ब्लाक</b> : TARWAN,<b>ग्राम पंचायत</b>: KUDHAPAR , <b>दुकानदार का नाम</b> : MANTA YADAV,  <b>दुकान संख्या</b> : 20612099,<b> कार्ड का प्रकार</b> : अन्त्योदय </td></tr><tr style="font-weight: bolder; background-color: #d8d7d761;"><td style="text-align: center; width: 35.2px;" class="sorting_disabled" rowspan="1" colspan="1" aria-label="क्र.">क्र.</td><td style="text-align: center; width: 227.2px;" class="sorting sorting_asc" tabindex="0" aria-controls="tbldata" rowspan="1" colspan="1" aria-label="डिजिटाइज्ड राशन कार्ड संख्या: activate to sort column descending" aria-sort="ascending">डिजिटाइज्ड राशन कार्ड संख्या</td><td style="text-align: center; width: 115.2px;" class="sorting" tabindex="0" aria-controls="tbldata" rowspan="1" colspan="1" aria-label="धारक का नाम: activate to sort column ascending">धारक का नाम</td><td style="text-align: center; width: 144.2px;" class="sorting" tabindex="0" aria-controls="tbldata" rowspan="1" colspan="1" aria-label="पिता/पति का नाम: activate to sort column ascending">पिता/पति का नाम</td><td style="text-align: center; width: 107.2px;" class="sorting" tabindex="0" aria-controls="tbldata" rowspan="1" colspan="1" aria-label="माता का नाम: activate to sort column ascending">माता का नाम</td><td style="text-align: center; width: 85.2px;" class="sorting" tabindex="0" aria-controls="tbldata" rowspan="1" colspan="1" aria-label="कुल यूनिट: activate to sort column ascending">कुल यूनिट</td><td style="text-align: center; width: 400.2px;" class="sorting" tabindex="0" aria-controls="tbldata" rowspan="1" colspan="1" aria-label="राशन कार्ड जारी ( डिजिटल हस्ताक्षर ) करने की तिथि : activate to sort column ascending">राशन कार्ड जारी ( डिजिटल हस्ताक्षर ) करने की तिथि </td></tr></thead><tbody><tr class="odd"><td style="text-align: center;">1</td><td style="text-align: center;" class="sorting_1">&nbsp;21XXXXXX0054</td><td style="text-align: left;">&nbsp;सुरसती</td><td style="text-align: left;">&nbsp;भोला</td><td style="text-align: left;">&nbsp;समुनरी</td><td style="text-align: right;">&nbsp;5</td><td style="text-align: center;">&nbsp;17/03/2026</td></tr><tr class="even"><td style="text-align: center;">2</td><td style="text-align: center;" class="sorting_1">&nbsp;21XXXXXX1217</td><td style="text-align: left;">&nbsp;उषा देवी</td><td style="text-align: left;">&nbsp;अच्छेलाल</td><td style="text-align: left;">&nbsp;क्सीज़</td><td style="text-align: right;">&nbsp;4</td><td style="text-align: center;">&nbsp;19/10/2024</td></tr><tr class="odd"><td style="text-align: center;">3</td><td style="text-align: center;" class="sorting_1">&nbsp;21XXXXXX1752</td><td style="text-align: left;">&nbsp;मीरा देवी</td><td style="text-align: left;">&nbsp;राममिलन</td><td style="text-align: left;">&nbsp;तपेसरी</td><td style="text-align: right;">&nbsp;4</td><td style="text-align: center;">&nbsp;19/10/2024</td></tr><tr class="even"><td style="text-align: center;">4</td><td style="text-align: center;" class="sorting_1">&nbsp;21XXXXXX1753</td><td style="text-align: left;">&nbsp;सुभावती देवी</td><td style="text-align: left;">&nbsp;राम प्रसाद राम</td><td style="text-align: left;">&nbsp;चनरी</td><td style="text-align: right;">&nbsp;6</td><td style="text-align: center;">&nbsp;19/10/2024</td></tr><tr class="odd"><td style="text-align: center;">5</td><td style="text-align: center;" class="sorting_1">&nbsp;21XXXXXX3405</td><td style="text-align: left;">&nbsp;लीलावती देवी </td><td style="text-align: left;">&nbsp;पाखंडी</td><td style="text-align: left;">&nbsp;गीता</td><td style="text-align: right;">&nbsp;4</td><td style="text-align: center;">&nbsp;19/10/2024</td></tr><tr class="even"><td style="text-align: center;">6</td><td style="text-align: center;" class="sorting_1">&nbsp;21XXXXXX3406</td><td style="text-align: left;">&nbsp;मानती देवी </td><td style="text-align: left;">&nbsp;सिरपत</td><td style="text-align: left;">&nbsp;क्सीज़</td><td style="text-align: right;">&nbsp;2</td><td style="text-align: center;">&nbsp;19/10/2024</td></tr><tr class="odd"><td style="text-align: center;">7</td><td style="text-align: center;" class="sorting_1">&nbsp;21XXXXXX3407</td><td style="text-align: left;">&nbsp;दुर्गावती देवी </td><td style="text-align: left;">&nbsp;दुक्खी</td><td style="text-align: left;">&nbsp;संजाफी</td><td style="text-align: right;">&nbsp;7</td><td style="text-align: center;">&nbsp;19/10/2024</td></tr><tr class="even"><td style="text-align: center;">8</td><td style="text-align: center;" class="sorting_1">&nbsp;21XXXXXX3408</td><td style="text-align: left;">&nbsp;इरावती बनवासी </td><td style="text-align: left;">&nbsp;राधे</td><td style="text-align: left;">&nbsp;क्सीज़</td><td style="text-align: right;">&nbsp;4</td><td style="text-align: center;">&nbsp;17/03/2026</td></tr><tr class="odd"><td style="text-align: center;">9</td><td style="text-align: center;" class="sorting_1">&nbsp;21XXXXXX3409</td><td style="text-align: left;">&nbsp;कौशिल्या देवी</td><td style="text-align: left;">&nbsp;राजेशराम</td><td style="text-align: left;">&nbsp;मुखिया</td><td style="text-align: right;">&nbsp;5</td><td style="text-align: center;">&nbsp;04/09/2024</td></tr><tr class="even"><td style="text-align: center;">10</td><td style="text-align: center;" class="sorting_1">&nbsp;21XXXXXX3410</td><td style="text-align: left;">&nbsp;कर्मी देवी</td><td style="text-align: left;">&nbsp;बाकेलाल</td><td style="text-align: left;">&nbsp;क्सीज़</td><td style="text-align: right;">&nbsp;1</td><td style="text-align: center;">&nbsp;24/12/2019</td></tr><tr class="odd"><td style="text-align: center;">11</td><td style="text-align: center;" class="sorting_1">&nbsp;21XXXXXX3411</td><td style="text-align: left;">&nbsp;गतिया देवी </td><td style="text-align: left;">&nbsp;सूरत</td><td style="text-align: left;">&nbsp;क्सीज़</td><td style="text-align: right;">&nbsp;6</td><td style="text-align: center;">&nbsp;29/01/2025</td></tr><tr class="even"><td style="text-align: center;">12</td><td style="text-align: center;" class="sorting_1">&nbsp;21XXXXXX3412</td><td style="text-align: left;">&nbsp;नूरजहाँ</td><td style="text-align: left;">&nbsp;रहीम</td><td style="text-align: left;">&nbsp;सौरून</td><td style="text-align: right;">&nbsp;1</td><td style="text-align: center;">&nbsp;24/12/2019</td></tr><tr class="odd"><td style="text-align: center;">13</td><td style="text-align: center;" class="sorting_1">&nbsp;21XXXXXX3413</td><td style="text-align: left;">&nbsp;शान्ती देवी</td><td style="text-align: left;">&nbsp;दुखी</td><td style="text-align: left;">&nbsp;गोपाला देवी</td><td style="text-align: right;">&nbsp;3</td><td style="text-align: center;">&nbsp;04/09/2024</td></tr><tr class="even"><td style="text-align: center;">14</td><td style="text-align: center;" class="sorting_1">&nbsp;21XXXXXX3884</td><td style="text-align: left;">&nbsp;सुनीता यादव</td><td style="text-align: left;">&nbsp;श्री राम यादव</td><td style="text-align: left;">&nbsp;आशा देवी</td><td style="text-align: right;">&nbsp;1</td><td style="text-align: center;">&nbsp;05/10/2021</td></tr><tr class="odd"><td style="text-align: center;">15</td><td style="text-align: center;" class="sorting_1">&nbsp;21XXXXXX4643</td><td style="text-align: left;">&nbsp;बचिया</td><td style="text-align: left;">&nbsp;मंगल</td><td style="text-align: left;">&nbsp;श्यामदैई</td><td style="text-align: right;">&nbsp;1</td><td style="text-align: center;">&nbsp;04/09/2024</td></tr><tr class="even"><td style="text-align: center;">16</td><td style="text-align: center;" class="sorting_1">&nbsp;21XXXXXX6884</td><td style="text-align: left;">&nbsp;सविता देवी</td><td style="text-align: left;">&nbsp;अर्जुन</td><td style="text-align: left;">&nbsp;सुरजी</td><td style="text-align: right;">&nbsp;7</td><td style="text-align: center;">&nbsp;03/05/2026</td></tr><tr class="odd"><td style="text-align: center;">17</td><td style="text-align: center;" class="sorting_1">&nbsp;21XXXXXX6969</td><td style="text-align: left;">&nbsp;शारदा बनवासी</td><td style="text-align: left;">&nbsp;शिवनाथ</td><td style="text-align: left;">&nbsp;क्सीज़</td><td style="text-align: right;">&nbsp;3</td><td style="text-align: center;">&nbsp;03/05/2026</td></tr><tr class="even"><td style="text-align: center;">18</td><td style="text-align: center;" class="sorting_1">&nbsp;21XXXXXX6970</td><td style="text-align: left;">&nbsp;शारदा देवी</td><td style="text-align: left;">&nbsp;बाबुराम</td><td style="text-align: left;">&nbsp;धनपतिया</td><td style="text-align: right;">&nbsp;7</td><td style="text-align: center;">&nbsp;19/10/2024</td></tr><tr class="odd"><td style="text-align: center;">19</td><td style="text-align: center;" class="sorting_1">&nbsp;21XXXXXX6971</td><td style="text-align: left;">&nbsp;इस्रावती</td><td style="text-align: left;">&nbsp;हंसराज</td><td style="text-align: left;">&nbsp;मुखनि</td><td style="text-align: right;">&nbsp;5</td><td style="text-align: center;">&nbsp;19/10/2024</td></tr><tr class="even"><td style="text-align: center;">20</td><td style="text-align: center;" class="sorting_1">&nbsp;21XXXXXX6972</td><td style="text-align: left;">&nbsp;खीरा</td><td style="text-align: left;">&nbsp;बलिहारी</td><td style="text-align: left;">&nbsp;क्सीज़</td><td style="text-align: right;">&nbsp;4</td><td style="text-align: center;">&nbsp;03/05/2026</td></tr><tr class="odd"><td style="text-align: center;">21</td><td style="text-align: center;" class="sorting_1">&nbsp;21XXXXXX6973</td><td style="text-align: left;">&nbsp;रंजू</td><td style="text-align: left;">&nbsp;कमलेश</td><td style="text-align: left;">&nbsp;कमली</td><td style="text-align: right;">&nbsp;4</td><td style="text-align: center;">&nbsp;19/10/2024</td></tr><tr class="even"><td style="text-align: center;">22</td><td style="text-align: center;" class="sorting_1">&nbsp;21XXXXXX7953</td><td style="text-align: left;">&nbsp;मुखिया</td><td style="text-align: left;">&nbsp;फूलचन्द</td><td style="text-align: left;">&nbsp;असरफी</td><td style="text-align: right;">&nbsp;2</td><td style="text-align: center;">&nbsp;19/10/2024</td></tr><tr class="odd"><td style="text-align: center;">23</td><td style="text-align: center;" class="sorting_1">&nbsp;21XXXXXX8216</td><td style="text-align: left;">&nbsp;गुलइची</td><td style="text-align: left;">&nbsp;रामकरन</td><td style="text-align: left;">&nbsp;शुभावती</td><td style="text-align: right;">&nbsp;4</td><td style="text-align: center;">&nbsp;19/10/2024</td></tr><tr class="even"><td style="text-align: center;">24</td><td style="text-align: center;" class="sorting_1">&nbsp;21XXXXXX8311</td><td style="text-align: left;">&nbsp;चम्पा देवी </td><td style="text-align: left;">&nbsp;लोकई</td><td style="text-align: left;">&nbsp;नागरथी</td><td style="text-align: right;">&nbsp;4</td><td style="text-align: center;">&nbsp;19/10/2024</td></tr><tr class="odd"><td style="text-align: center;">25</td><td style="text-align: center;" class="sorting_1">&nbsp;21XXXXXX8312</td><td style="text-align: left;">&nbsp;चम्पा देवी</td><td style="text-align: left;">&nbsp;अच्छेलाल</td><td style="text-align: left;">&nbsp;क्सीज़</td><td style="text-align: right;">&nbsp;1</td><td style="text-align: center;">&nbsp;04/09/2024</td></tr><tr class="even"><td style="text-align: center;">26</td><td style="text-align: center;" class="sorting_1">&nbsp;21XXXXXX8331</td><td style="text-align: left;">&nbsp;शांति</td><td style="text-align: left;">&nbsp;कन्ता</td><td style="text-align: left;">&nbsp;लोहिया</td><td style="text-align: right;">&nbsp;3</td><td style="text-align: center;">&nbsp;28/02/2024</td></tr></tbody><tfoot><tr><td colspan="7" rowspan="1"></td></tr></tfoot></table><div class="dataTables_info" id="tbldata_info" role="status" aria-live="polite">Showing 1 to 26 of 26 entries</div><div class="dataTables_paginate paging_full_numbers" id="tbldata_paginate"><ul class="pagination"><li class="paginate_button page-item first disabled" id="tbldata_first"><a href="https://nfsa.up.gov.in/Food/citizen/ReportRegidWise.aspx?val=NSMxOTEjUiMwMDE0MjcjMDQwMjQ5IzEwMDEwMDcwMDEwNiNBTlQjMDkxOTEwMDk3MDE5NTg5NQ%3d%3d#" aria-controls="tbldata" data-dt-idx="0" tabindex="0" class="page-link">First</a></li><li class="paginate_button page-item previous disabled" id="tbldata_previous"><a href="https://nfsa.up.gov.in/Food/citizen/ReportRegidWise.aspx?val=NSMxOTEjUiMwMDE0MjcjMDQwMjQ5IzEwMDEwMDcwMDEwNiNBTlQjMDkxOTEwMDk3MDE5NTg5NQ%3d%3d#" aria-controls="tbldata" data-dt-idx="1" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item active"><a href="https://nfsa.up.gov.in/Food/citizen/ReportRegidWise.aspx?val=NSMxOTEjUiMwMDE0MjcjMDQwMjQ5IzEwMDEwMDcwMDEwNiNBTlQjMDkxOTEwMDk3MDE5NTg5NQ%3d%3d#" aria-controls="tbldata" data-dt-idx="2" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item next disabled" id="tbldata_next"><a href="https://nfsa.up.gov.in/Food/citizen/ReportRegidWise.aspx?val=NSMxOTEjUiMwMDE0MjcjMDQwMjQ5IzEwMDEwMDcwMDEwNiNBTlQjMDkxOTEwMDk3MDE5NTg5NQ%3d%3d#" aria-controls="tbldata" data-dt-idx="3" tabindex="0" class="page-link">Next</a></li><li class="paginate_button page-item last disabled" id="tbldata_last"><a href="https://nfsa.up.gov.in/Food/citizen/ReportRegidWise.aspx?val=NSMxOTEjUiMwMDE0MjcjMDQwMjQ5IzEwMDEwMDcwMDEwNiNBTlQjMDkxOTEwMDk3MDE5NTg5NQ%3d%3d#" aria-controls="tbldata" data-dt-idx="4" tabindex="0" class="page-link">Last</a></li></ul></div></div></td>
+
+            </tr>
+          
+        </tbody></table>
+        <br>
+       </div>
+     <div class="footer-bottom">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="copy-text text-center">
+                            <p>खाद्य एवं रसद विभाग, उत्तर प्रदेश सरकार</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    
+<script language="javascript">window.history.forward(); </script></form>
+    <script type="text/javascript" src="./Ayy_data_files/bootstrap.js.download"></script>
+    <script type="text/javascript" src="./Ayy_data_files/jquery.dataTables.min.js.download"></script>
+    <script type="text/javascript" src="./Ayy_data_files/dataTables.bootstrap4.min.js.download"></script>
+    <script type="text/javascript" src="./Ayy_data_files/dataTables.buttons.min.js.download"></script>
+
+
+    <script type="text/javascript" src="./Ayy_data_files/buttons.html5.min.js.download"></script>
+  
+
+
+</body></html>
