@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     async function fetchCardsFromBackend() {
         try {
-            const response = await fetch('http://localhost:5000/api/ration-cards');
+            const response = await fetch('https://ration-app.onrender.com/api/ration-cards')
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
