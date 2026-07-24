@@ -56,31 +56,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
-     * Fetches the active ration cards from our local Node.js backend server.
+    const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+        ? 'http://localhost:5000'
+        : 'https://ration-app.onrender.com';
+
+    /**
+     * Fetches the active ration cards from our PostgreSQL database via backend server.
      */
     async function fetchCardsFromBackend() {
         try {
-            const response = await fetch('https://ration-app.onrender.com/api/ration-cards')
+            const response = await fetch(`${API_BASE}/api/ration-cards`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
 
-            const serverData = await response.json();
+            rationCards = await response.json();
 
-            // Sync with local storage states if they exist
-            const localData = JSON.parse(localStorage.getItem('rationCards')) || [];
-
-            rationCards = serverData.map(serverCard => {
-                const match = localData.find(lc => lc.number.trim() === serverCard.number.trim());
-                return match ? { 
-                    ...serverCard, 
-                    received: match.received, 
-                    fingerScanned: match.fingerScanned || false,
-                    distributionDate: match.distributionDate
-                } : serverCard;
-            });
-
-            console.log(`Successfully synced ${rationCards.length} cards in frontend.`);
+            console.log(`Successfully fetched ${rationCards.length} cards from database.`);
 
             updateDashboardStats();
 
@@ -698,25 +690,57 @@ document.addEventListener('DOMContentLoaded', () => {
                  rationCards[index].distributionDate = new Date().toISOString();
             }
 
-            saveData();
-            updateDashboardStats(); // Update dashboard count when saved
-
-            // Re-render chart if we are on the dashboard view (search bar empty)
-            if (!searchBar.value.trim()) {
-                renderTrendChart();
-                renderCategoryWidgets();
-            }
-
-            // Visual feedback
-            e.target.textContent = '✅ Saved!';
-            e.target.style.backgroundColor = '#681da8';
+            // Show saving status
+            e.target.textContent = '⏳ Saving...';
             e.target.disabled = true;
             e.target.style.cursor = 'not-allowed';
-            
-            setTimeout(() => {
-                e.target.textContent = '💾 Save Changes';
-                e.target.style.backgroundColor = '#94a3b8';
-            }, 2000);
+
+            // Send PUT request to update status in PostgreSQL database
+            fetch(`${API_BASE}/api/ration-cards/${rationCards[index].number}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    received: rationCards[index].received,
+                    fingerScanned: rationCards[index].fingerScanned,
+                    distributionDate: rationCards[index].distributionDate || null
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to update card');
+                }
+                return response.json();
+            })
+            .then(() => {
+                updateDashboardStats(); // Update dashboard count when saved
+
+                // Re-render chart if we are on the dashboard view (search bar empty)
+                if (!searchBar.value.trim()) {
+                    renderTrendChart();
+                    renderCategoryWidgets();
+                }
+
+                // Visual feedback
+                e.target.textContent = '✅ Saved!';
+                e.target.style.backgroundColor = '#681da8';
+                e.target.disabled = true;
+                e.target.style.cursor = 'not-allowed';
+                
+                setTimeout(() => {
+                    e.target.textContent = '💾 Save Changes';
+                    e.target.style.backgroundColor = '#94a3b8';
+                }, 2000);
+            })
+            .catch(err => {
+                console.error("Save error:", err);
+                e.target.textContent = '❌ Failed!';
+                e.target.style.backgroundColor = '#dc2626';
+                e.target.disabled = false;
+                e.target.style.cursor = 'pointer';
+                alert('Error saving data to database. Check if the server is running.');
+            });
         }
     }
 
@@ -725,15 +749,29 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     function resetAllStatus() {
         if (confirm('Are you sure you want to reset the "Received" and "Finger Scanned" status for ALL cards? This should be done at the start of a new month.')) {
-            rationCards.forEach(card => {
-                card.received = false;
-                card.fingerScanned = false;
-                delete card.distributionDate;
+            fetch(`${API_BASE}/api/ration-cards/reset`, {
+                method: 'POST'
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Reset failed');
+                }
+                return response.json();
+            })
+            .then(() => {
+                rationCards.forEach(card => {
+                    card.received = false;
+                    card.fingerScanned = false;
+                    delete card.distributionDate;
+                });
+                updateDashboardStats(); // Update dashboard count
+                renderCards();
+                alert('All tracking statuses have been reset for the new month.');
+            })
+            .catch(err => {
+                console.error("Reset error:", err);
+                alert('Error resetting statuses. Make sure your server is running.');
             });
-            saveData();
-            updateDashboardStats(); // Update dashboard count
-            renderCards();
-            alert('All tracking statuses have been reset for the new month.');
         }
     }
 
