@@ -42,7 +42,7 @@ async function seedDatabase() {
             const queryText = `
                 INSERT INTO ration_cards (card_number, holder_name, members, card_type, received, finger_scanned)
                 VALUES ($1, $2, $3, $4, $5, $6)
-                ON CONFLICT (card_number) DO NOTHING;
+                ON CONFLICT (card_number, holder_name) DO NOTHING;
             `;
 
             // These are the actual values that match the placeholders in order

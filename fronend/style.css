@@ -921,3 +921,397 @@ footer a:hover {
         font-size: 16px;
     }
 }
+
+/* ==========================================
+   11. Responsive Dashboard Grid & Cards
+   ========================================== */
+.dashboard-grid-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.dashboard-grid-container > p {
+    color: #7f8c8d;
+    margin-bottom: 20px;
+}
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 20px;
+}
+.dashboard-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #eef2f5;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-sizing: border-box;
+}
+.dashboard-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.dashboard-card-header h3 {
+    margin: 0;
+    color: #1e293b;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+.dashboard-card-header select {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+    font-size: 0.85rem;
+    color: #475569;
+    outline: none;
+    background: white;
+    cursor: pointer;
+}
+.trend-chart-container {
+    position: relative;
+    height: 250px;
+    width: 100%;
+    flex-grow: 1;
+}
+.last-dist-table {
+    width: 100%;
+    font-size: 0.95rem;
+    color: #475569;
+    border-spacing: 0 12px;
+    margin-bottom: 20px;
+}
+.last-dist-table td {
+    padding: 4px 0;
+}
+.last-dist-table tr td:first-child {
+    width: 35%;
+}
+.last-dist-table tr td:last-child {
+    font-weight: 600;
+    color: #1e293b;
+}
+.stock-status-list {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.stock-status-header {
+    display: flex;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #334155;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f1f5f9;
+    margin-bottom: 10px;
+}
+.stock-status-row {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px dashed #f1f5f9;
+}
+.stock-status-item-name {
+    flex: 2;
+    font-weight: 700;
+    color: #991b1b;
+}
+.stock-status-bar-container {
+    flex: 3;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.stock-status-bar-bg {
+    flex: 1;
+    background: #f1f5f9;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.stock-status-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+}
+.stock-status-bar-val {
+    width: 75px;
+    font-weight: 700;
+    color: #1e293b;
+    font-size: 0.95rem;
+}
+.stock-status-badge-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+.stock-status-badge {
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+.stock-view-btn {
+    width: 100%;
+    margin-top: 15px;
+    padding: 12px;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    color: #1e293b;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: 0.2s;
+}
+.stock-view-btn:hover {
+    background: #f8fafc;
+}
+.category-doughnut-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-grow: 1;
+}
+.category-canvas-wrapper {
+    position: relative;
+    height: 160px;
+    width: 160px;
+    flex-shrink: 0;
+}
+.category-canvas-inner-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+.category-canvas-inner-label .total-num {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1e293b;
+}
+.category-canvas-inner-label .total-lbl {
+    font-size: 0.75rem;
+    color: #64748b;
+}
+.category-legend-list {
+    flex: 1;
+    font-size: 0.85rem;
+    color: #475569;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.category-legend-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.category-legend-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.category-legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+}
+.category-legend-val {
+    color: #1e293b;
+}
+
+/* ==========================================
+   12. Mobile Layout Controls Base Styles
+   ========================================== */
+.mobile-toggle-btn {
+    display: none; /* Hidden on desktop */
+    background: none;
+    border: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1001;
+}
+.mobile-toggle-btn span {
+    display: block;
+    width: 24px;
+    height: 3px;
+    background-color: #334155;
+    border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
+}
+.sidebar-close-btn {
+    display: none; /* Hidden on desktop */
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: white;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+}
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(2px);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+.sidebar-overlay.active {
+    display: block;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ==========================================
+   13. Responsive Media Queries (Mobile & Tablet)
+   ========================================== */
+@media (max-width: 768px) {
+    /* Layout structure alterations */
+    .app-layout {
+        flex-direction: column;
+    }
+
+    /* Absolute/drawer sidebar configuration */
+    .sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100vh;
+        z-index: 1000;
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 5px 0 25px rgba(0,0,0,0.15);
+    }
+    
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    /* Enable close and open buttons on mobile */
+    .sidebar-close-btn {
+        display: block;
+        margin-left: auto;
+    }
+    
+    .mobile-toggle-btn {
+        display: flex;
+    }
+
+    /* Top Header responsive adjustments */
+    .top-header {
+        padding: 0 15px;
+        height: 60px;
+        gap: 10px;
+    }
+
+    .header-search {
+        width: 100%;
+        max-width: none;
+        padding: 6px 12px;
+    }
+
+    .header-actions {
+        gap: 10px;
+    }
+
+    /* Minimize/hide minor elements to save space */
+    .datetime-widget {
+        display: none; /* Hide date/time widget on mobile header to avoid crowding */
+    }
+
+    .user-profile-sm .info {
+        display: none; /* Hide name/role text next to profile avatar */
+    }
+
+    /* Main Container adjustments */
+    main {
+        padding: 15px;
+    }
+
+    /* Stats grid scaling down */
+    .dashboard-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    /* Control panel adjustments */
+    .search-box-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .search-box-row input[type="text"] {
+        width: 100%;
+    }
+
+    #search-btn {
+        width: 100%;
+    }
+
+    .radio-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* Dashboard grids scaling down */
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .dashboard-card {
+        padding: 15px;
+    }
+
+    .category-doughnut-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .category-canvas-wrapper {
+        margin: 0 auto;
+    }
+
+    /* Modals sizing responsive */
+    .modal-content {
+        width: 90%;
+        padding: 20px;
+        margin: 10px;
+    }
+
+    .modal-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* Stats tables scrollable */
+    #list-modal .modal-content {
+        max-width: 95% !important;
+        width: 95%;
+        padding: 15px;
+    }
+
+    /* Analysis page responsive styling */
+    .analysis-mid-row {
+        grid-template-columns: 1fr !important;
+    }
+}

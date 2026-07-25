@@ -15,10 +15,11 @@
 <body class="dashboard-layout">
     <div class="app-layout">
         <!-- Sidebar Panel -->
-        <aside class="sidebar">
+        <aside class="sidebar" id="app-sidebar">
             <div class="sidebar-header">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Emblem_of_India.svg/250px-Emblem_of_India.svg.png" alt="NFSA Logo" class="sidebar-logo">
                 <h2>Village Ration<br>Management System</h2>
+                <button id="sidebar-close-btn" class="sidebar-close-btn" aria-label="Close Sidebar">&times;</button>
             </div>
             
             <nav class="sidebar-nav">
@@ -32,6 +33,7 @@
                 <div class="nav-section">MANAGEMENT</div>
                 <a href="#" class="nav-item" id="sidebar-stock-btn"><span class="nav-icon">📦</span> Stock Management</a>
                 <a href="#" class="nav-item" id="sidebar-reports-btn"><span class="nav-icon">📄</span> Reports</a>
+                <a href="#" class="nav-item" id="sidebar-analysis-btn"><span class="nav-icon">📊</span> Analysis</a>
                 
 
                 
@@ -65,10 +67,17 @@
                 </div>
             </div>
         </aside>
+        <!-- Sidebar Backdrop Overlay for Mobile -->
+        <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
         <!-- Main Content Area -->
         <div class="main-content-area">
             <header class="top-header">
+                <button id="mobile-sidebar-toggle" class="mobile-toggle-btn" aria-label="Open Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
                 <div class="header-search">
                     <span class="search-icon">🔍</span>
                     <input type="text" placeholder="Search by Name or Ration Card Number...">
@@ -108,7 +117,7 @@
 
             <main>
         <!-- Dashboard Stats Overview -->
-        <div class="dashboard-stats">
+        <div class="dashboard-stats" id="dashboard-stats">
             <div class="stat-card" id="total-stat-card" style="cursor: pointer; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'" title="Click to view all families">
                 <div class="stat-icon icon-total">👥</div>
                 <div class="stat-details">
@@ -141,17 +150,9 @@
                     <span class="stat-subtitle">Families Remaining</span>
                 </div>
             </div>
-            <div class="stat-card">
-                <div class="stat-icon icon-members">👪</div>
-                <div class="stat-details">
-                    <span class="stat-title">Total Members</span>
-                    <span class="stat-value" id="stat-total-members">0</span>
-                    <span class="stat-subtitle">In All Families</span>
-                </div>
-            </div>
         </div>
 
-        <div class="card controls-card">
+        <div class="card controls-card" id="search-card">
             <h2>Search Ration Card</h2>
 
             <div class="radio-group">
@@ -166,7 +167,7 @@
             </div>
 
             <div class="search-box-row">
-                <input type="text" id="search-bar" placeholder="Enter details to search...">
+                <input type="text" id="search-bar" placeholder="Enter the name in Hindi...">
                 <button id="search-btn">Search</button>
             </div>
 
@@ -175,6 +176,10 @@
 
 
         <div id="search-result-display">
+        </div>
+
+        <!-- Dedicated Analysis Page -->
+        <div id="analysis-page" class="hidden">
         </div>
     </main>
     <footer>

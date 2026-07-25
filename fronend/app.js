@@ -135,13 +135,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const elAay = document.getElementById('stat-aay-families');
         const elPhh = document.getElementById('stat-phh-families');
         const elPending = document.getElementById('stat-pending-families');
-        const elMembers = document.getElementById('stat-total-members');
 
         if (elTotal) elTotal.textContent = totalFamilies;
         if (elAay) elAay.textContent = aayFamilies;
         if (elPhh) elPhh.textContent = phhFamilies;
         if (elPending) elPending.textContent = pendingFamilies;
-        if (elMembers) elMembers.textContent = totalMembers;
     }
 
     /**
@@ -410,131 +408,61 @@ document.addEventListener('DOMContentLoaded', () => {
             const wp = getStatusProps(availWheat, totalWheat);
             const rp = getStatusProps(availRice, totalRice);
 
+            // Find latest distribution from real data
+            let latestDistribution = null;
+            rationCards.forEach(card => {
+                if (card.received && card.distributionDate) {
+                    if (!latestDistribution || new Date(card.distributionDate) > new Date(latestDistribution.distributionDate)) {
+                        latestDistribution = card;
+                    }
+                }
+            });
+
+            const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            let dateString = "No recent distribution";
+            let nameString = "--";
+            let typeString = "--";
+            let txnString = "--";
+
+            if (latestDistribution) {
+                const lDate = new Date(latestDistribution.distributionDate);
+                dateString = `${lDate.getDate()} ${monthNames[lDate.getMonth()]} ${lDate.getFullYear()}, ${lDate.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`;
+                nameString = latestDistribution.name || "--";
+                typeString = latestDistribution.type || "--";
+                txnString = 'TXN-' + latestDistribution.number;
+            }
+
             cardList.innerHTML = `
-                <div style="padding: 20px; max-width: 1200px;">
-                    <p style="color:#7f8c8d; margin-bottom: 20px;">Enter a name or card number above and click Search to view details.</p>
-                    
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 20px;">
-                        
-                        <!-- Row 1, Col 1: Distribution Trend -->
-                        <div style="background: white; padding: 25px; border-radius: 12px; border: 1px solid #eef2f5; box-shadow: 0 4px 15px rgba(0,0,0,0.02); display: flex; flex-direction: column; height: 100%;">
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                                <h3 style="margin: 0; color: #1e293b; font-size: 1.2rem; font-weight: 700;">Distribution Trend <span style="color:#64748b; font-size: 0.85rem; font-weight: normal;">(Daily)</span></h3>
-                                <select style="padding: 6px 12px; border-radius: 6px; border: 1px solid #e2e8f0; font-size: 0.85rem; color: #475569; outline: none; background: white; cursor: pointer;">
-                                    <option>This Month</option>
-                                </select>
-                            </div>
-                            <div style="position: relative; height: 250px; width: 100%; flex-grow: 1;">
-                                <canvas id="distribution-trend-chart"></canvas>
-                            </div>
+                <div class="dashboard-single-container" style="max-width: 600px; margin: 20px auto; padding: 20px;">
+                    <!-- Last Distribution Card -->
+                    <div class="dashboard-card" style="box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; background: white; padding: 30px; border-radius: 12px; display: flex; flex-direction: column;">
+                        <div class="dashboard-card-header" style="margin-bottom: 25px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 15px;">
+                            <h3 style="margin:0; font-size: 1.3rem; color: #1e293b; font-weight: 800; display: flex; align-items: center; gap: 8px;">
+                                <span>📋</span> Last Distribution
+                            </h3>
                         </div>
-
-                        <!-- Row 1, Col 2: Last Distribution -->
-                        <div style="background: white; padding: 25px; border-radius: 12px; border: 1px solid #eef2f5; box-shadow: 0 4px 15px rgba(0,0,0,0.02); display: flex; flex-direction: column; height: 100%;">
-                            <h3 style="margin: 0 0 20px 0; color: #1e293b; font-size: 1.1rem; font-weight: 700;">Last Distribution</h3>
-                            <table style="width: 100%; font-size: 0.95rem; color: #475569; border-spacing: 0 12px;">
-                                <tr><td style="width: 35%;">Date</td><td style="font-weight: 600; color: #1e293b;" id="last-dist-date">--</td></tr>
-                                <tr><td>Card Holder Name</td><td style="font-weight: 600; color: #1e293b;" id="last-dist-name">--</td></tr>
-                                <tr><td>Type of Card</td><td style="font-weight: 600; color: #1e293b;" id="last-dist-type">--</td></tr>
-                                <tr><td>Transaction ID</td><td style="font-weight: 600; color: #1e293b;" id="last-dist-txn">--</td></tr>
-                            </table>
-                            <button class="btn-primary" style="width: 100%; margin-top: auto; display: flex; align-items: center; justify-content: center; gap: 8px;">
-                                <span class="nav-icon">📄</span> View Full History
-                            </button>
-                        </div>
-                        
-                        <!-- Row 2, Col 1: Stock Status -->
-                        <div style="background: white; padding: 25px; border-radius: 12px; border: 1px solid #eef2f5; box-shadow: 0 4px 15px rgba(0,0,0,0.02); display: flex; flex-direction: column; height: 100%;">
-                            <h3 style="margin: 0 0 20px 0; color: #1e293b; font-size: 1.2rem; font-weight: 700;">Stock Status</h3>
-                            
-                            <div style="display: flex; flex-direction: column; flex-grow: 1;">
-                                <!-- Table Header -->
-                                <div style="display: flex; font-size: 0.95rem; font-weight: 700; color: #334155; padding-bottom: 12px; border-bottom: 1px solid #f1f5f9; margin-bottom: 10px;">
-                                    <div style="flex: 2;">Items</div>
-                                    <div style="flex: 3;">Available</div>
-                                    <div style="flex: 1; text-align: center;">Status</div>
-                                </div>
-                                
-                                <!-- Row: Wheat -->
-                                <div style="display: flex; align-items: center; padding: 12px 0; border-bottom: 1px dashed #f1f5f9;">
-                                    <div style="flex: 2; font-weight: 700; color: #991b1b;">Wheat</div>
-                                    <div style="flex: 3; display: flex; align-items: center; gap: 15px;">
-                                        <div style="flex: 1; background: #f1f5f9; height: 8px; border-radius: 4px; overflow: hidden;">
-                                            <div style="width: ${wp.pct}%; background: ${wp.color}; height: 100%; border-radius: 4px;"></div>
-                                        </div>
-                                        <div style="width: 75px; font-weight: 700; color: #1e293b; font-size: 0.95rem;">${availWheat} Kg</div>
-                                    </div>
-                                    <div style="flex: 1; display: flex; justify-content: center;">
-                                        <span style="background: ${wp.bg}; color: ${wp.textClass}; padding: 4px 12px; border-radius: 6px; font-size: 0.85rem; font-weight: 700;">${wp.label}</span>
-                                    </div>
-                                </div>
-
-                                <!-- Row: Rice -->
-                                <div style="display: flex; align-items: center; padding: 12px 0; border-bottom: 1px dashed #f1f5f9;">
-                                    <div style="flex: 2; font-weight: 700; color: #991b1b;">Rice</div>
-                                    <div style="flex: 3; display: flex; align-items: center; gap: 15px;">
-                                        <div style="flex: 1; background: #f1f5f9; height: 8px; border-radius: 4px; overflow: hidden;">
-                                            <div style="width: ${rp.pct}%; background: ${rp.color}; height: 100%; border-radius: 4px;"></div>
-                                        </div>
-                                        <div style="width: 75px; font-weight: 700; color: #1e293b; font-size: 0.95rem;">${availRice} Kg</div>
-                                    </div>
-                                    <div style="flex: 1; display: flex; justify-content: center;">
-                                        <span style="background: ${rp.bg}; color: ${rp.textClass}; padding: 4px 12px; border-radius: 6px; font-size: 0.85rem; font-weight: 700;">${rp.label}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <button style="width: 100%; margin-top: 15px; padding: 12px; background: white; border: 1px solid #e2e8f0; border-radius: 8px; color: #1e293b; font-weight: 700; font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'">
-                                <span style="color: #334155; font-size: 1.1rem;">📄</span> View Stock Details
-                            </button>
-                        </div>
-
-                        <!-- Row 2, Col 2: Category Chart -->
-                        <div style="background: white; padding: 25px; border-radius: 12px; border: 1px solid #eef2f5; box-shadow: 0 4px 15px rgba(0,0,0,0.02); display: flex; flex-direction: column; height: 100%;">
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                                <h3 style="margin: 0; color: #1e293b; font-size: 1.1rem; font-weight: 700;">Distribution by Category <span style="color:#64748b; font-size: 0.85rem; font-weight: normal;">(This Month)</span></h3>
-                            </div>
-                            <div style="display: flex; align-items: center; gap: 20px; flex-grow: 1;">
-                                <div style="position: relative; height: 160px; width: 160px; flex-shrink: 0;">
-                                    <canvas id="category-doughnut-chart"></canvas>
-                                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
-                                        <div style="font-size: 1.5rem; font-weight: bold; color: #1e293b;" id="doughnut-total">0</div>
-                                        <div style="font-size: 0.75rem; color: #64748b;">Total Families</div>
-                                    </div>
-                                </div>
-                                <div style="flex: 1; font-size: 0.85rem; color: #475569; display: flex; flex-direction: column; gap: 12px;">
-                                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                                        <div style="display: flex; align-items: center; gap: 8px;">
-                                            <div style="width: 12px; height: 12px; border-radius: 3px; background-color: #16a34a;"></div>
-                                            <span>Antyodaya (AAY)</span>
-                                        </div>
-                                        <strong style="color: #1e293b;" id="legend-aay">0 (0%)</strong>
-                                    </div>
-                                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                                        <div style="display: flex; align-items: center; gap: 8px;">
-                                            <div style="width: 12px; height: 12px; border-radius: 3px; background-color: #2563eb;"></div>
-                                            <span>Priority Household (PHH)</span>
-                                        </div>
-                                        <strong style="color: #1e293b;" id="legend-phh">0 (0%)</strong>
-                                    </div>
-                                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                                        <div style="display: flex; align-items: center; gap: 8px;">
-                                            <div style="width: 12px; height: 12px; border-radius: 3px; background-color: #f59e0b;"></div>
-                                            <span>Other (BPL)</span>
-                                        </div>
-                                        <strong style="color: #1e293b;" id="legend-bpl">0 (0%)</strong>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="btn-cancel" style="width: 100%; margin-top: auto; display: flex; align-items: center; justify-content: center; gap: 8px;">
-                                <span class="nav-icon">📊</span> View Category Details
-                            </button>
-                        </div>
+                        <table class="last-dist-table" style="width: 100%; border-collapse: collapse; font-size: 1rem; color: #475569; margin-bottom: 25px;">
+                            <tr style="border-bottom: 1px solid #f8fafc;"><td style="padding: 12px 0; width: 40%; color: #64748b; font-weight: 500;">Date</td><td style="padding: 12px 0; font-weight: 700; color: #0f172a;">${dateString}</td></tr>
+                            <tr style="border-bottom: 1px solid #f8fafc;"><td style="padding: 12px 0; color: #64748b; font-weight: 500;">Card Holder Name</td><td style="padding: 12px 0; font-weight: 700; color: #0f172a;">${nameString}</td></tr>
+                            <tr style="border-bottom: 1px solid #f8fafc;"><td style="padding: 12px 0; color: #64748b; font-weight: 500;">Type of Card</td><td style="padding: 12px 0; font-weight: 700; color: #0f172a;">${typeString}</td></tr>
+                            <tr><td style="padding: 12px 0; color: #64748b; font-weight: 500;">Transaction ID</td><td style="padding: 12px 0; font-weight: 700; color: #0f172a; font-family: monospace; font-size: 0.95rem;">${txnString}</td></tr>
+                        </table>
+                        <button class="btn-primary" id="dashboard-view-history-btn" style="width: 100%; margin-top: auto; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px; font-weight: bold; background-color: #2563eb; transition: 0.2s;" onmouseover="this.style.backgroundColor='#1d4ed8'" onmouseout="this.style.backgroundColor='#2563eb'">
+                            <span>📄</span> View Full History
+                        </button>
                     </div>
                 </div>
             `;
-            renderTrendChart();
-            renderCategoryWidgets();
+
+            // Bind click event to View Full History button inside card
+            const historyBtn = document.getElementById('dashboard-view-history-btn');
+            if (historyBtn) {
+                historyBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const historyFamilies = rationCards.filter(c => c.received);
+                    showListModal('Ration History', 'List of families who have received their ration in the current cycle.', historyFamilies);
+                });
+            }
             return;
         }
 
@@ -695,7 +623,7 @@ document.addEventListener('DOMContentLoaded', () => {
             e.target.style.cursor = 'not-allowed';
 
             // Send PUT request to update status in PostgreSQL database
-            fetch(`${API_BASE}/api/ration-cards/${rationCards[index].number}`, {
+            fetch(`${API_BASE}/api/ration-cards/${rationCards[index].id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -715,10 +643,11 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(() => {
                 updateDashboardStats(); // Update dashboard count when saved
 
-                // Re-render chart if we are on the dashboard view (search bar empty)
-                if (!searchBar.value.trim()) {
-                    renderTrendChart();
-                    renderCategoryWidgets();
+                // Re-render analytics if currently viewing the Analysis page
+                const analysisPage = document.getElementById('analysis-page');
+                const isAnalysisVisible = analysisPage && !analysisPage.classList.contains('hidden');
+                if (isAnalysisVisible) {
+                    showAnalysisView();
                 }
 
                 // Visual feedback
@@ -845,6 +774,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- Dynamic Search Bar Placeholders ---
+    const searchTypeRadios = document.querySelectorAll('input[name="searchType"]');
+    if (searchTypeRadios.length > 0 && searchBar) {
+        const updatePlaceholder = () => {
+            const checkedRadio = document.querySelector('input[name="searchType"]:checked');
+            if (checkedRadio) {
+                if (checkedRadio.value === 'name') {
+                    searchBar.placeholder = 'Enter the name in Hindi...';
+                } else if (checkedRadio.value === 'number') {
+                    searchBar.placeholder = 'Enter the last 4 digits of ration card...';
+                }
+            }
+        };
+
+        searchTypeRadios.forEach(radio => {
+            radio.addEventListener('change', updatePlaceholder);
+        });
+
+        // Initialize placeholder
+        updatePlaceholder();
+    }
+
     // 3. Status Toggles and Reset Bindings
     if (cardList) {
         cardList.addEventListener('click', handleListClick);
@@ -858,6 +809,27 @@ document.addEventListener('DOMContentLoaded', () => {
     if (sidebarSearchBtn && searchBar) {
         sidebarSearchBtn.addEventListener('click', (e) => {
             e.preventDefault();
+            
+            // Ensure dashboard is visible
+            const dashboardStats = document.getElementById('dashboard-stats');
+            const searchCard = document.getElementById('search-card');
+            const searchResultDisplay = document.getElementById('search-result-display');
+            const analysisPage = document.getElementById('analysis-page');
+            const dashboardBtn = document.getElementById('sidebar-dashboard-btn');
+            const analysisBtn = document.getElementById('sidebar-analysis-btn');
+
+            if (dashboardStats) dashboardStats.classList.remove('hidden');
+            if (searchCard) searchCard.classList.remove('hidden');
+            if (searchResultDisplay) searchResultDisplay.classList.remove('hidden');
+            if (analysisPage) {
+                analysisPage.classList.add('hidden');
+                analysisPage.innerHTML = '';
+            }
+
+            if (dashboardBtn) dashboardBtn.classList.add('active');
+            if (analysisBtn) analysisBtn.classList.remove('active');
+
+            // Scroll and focus
             searchBar.scrollIntoView({ behavior: 'smooth', block: 'center' });
             searchBar.focus();
             
@@ -1055,7 +1027,29 @@ document.addEventListener('DOMContentLoaded', () => {
     if (dashboardBtn) {
         dashboardBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            // Scroll to the top of the page smoothly to show the dashboard
+            
+            // Switch views
+            const dashboardStats = document.getElementById('dashboard-stats');
+            const searchCard = document.getElementById('search-card');
+            const searchResultDisplay = document.getElementById('search-result-display');
+            const analysisPage = document.getElementById('analysis-page');
+            const analysisBtn = document.getElementById('sidebar-analysis-btn');
+
+            if (dashboardStats) dashboardStats.classList.remove('hidden');
+            if (searchCard) searchCard.classList.remove('hidden');
+            if (searchResultDisplay) searchResultDisplay.classList.remove('hidden');
+            if (analysisPage) {
+                analysisPage.classList.add('hidden');
+                analysisPage.innerHTML = ''; // Clear to prevent duplicate chart render IDs
+            }
+
+            dashboardBtn.classList.add('active');
+            if (analysisBtn) analysisBtn.classList.remove('active');
+
+            // Re-render simplified dashboard card (last distribution)
+            renderCards();
+
+            // Scroll to the top of the page smoothly
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
@@ -1184,6 +1178,370 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // --- Analysis / Analytics Dashboard Page View ---
+    function showAnalysisView() {
+        const dashboardStats = document.getElementById('dashboard-stats');
+        const searchCard = document.getElementById('search-card');
+        const searchResultDisplay = document.getElementById('search-result-display');
+        const analysisPage = document.getElementById('analysis-page');
+        const dashboardBtn = document.getElementById('sidebar-dashboard-btn');
+        const analysisBtn = document.getElementById('sidebar-analysis-btn');
+
+        if (!analysisPage) return;
+
+        // Calculate detailed analytics on-the-fly from the loaded rationCards data
+        const totalFamilies = rationCards.length;
+        if (totalFamilies === 0) {
+            alert('No data loaded yet. Please wait or check the backend.');
+            return;
+        }
+
+        const distributedFamilies = rationCards.filter(c => c.received).length;
+        const pendingFamilies = totalFamilies - distributedFamilies;
+        const distPct = Math.round((distributedFamilies / totalFamilies) * 100);
+
+        const fingerScannedFamilies = rationCards.filter(c => c.fingerScanned).length;
+        const fingerPct = Math.round((fingerScannedFamilies / totalFamilies) * 100);
+
+        // Category summary breakdown
+        let categories = {
+            'PHH': { total: 0, distributed: 0, units: 0 },
+            'AAY': { total: 0, distributed: 0, units: 0 },
+            'BPL': { total: 0, distributed: 0, units: 0 } // fallback
+        };
+
+        let totalMembers = 0;
+        let pendingMembers = 0;
+
+        rationCards.forEach(card => {
+            const type = (card.type || 'BPL').toUpperCase();
+            const members = parseInt(card.members) || 0;
+            totalMembers += members;
+
+            if (!categories[type]) {
+                categories[type] = { total: 0, distributed: 0, units: 0 };
+            }
+
+            categories[type].total++;
+            categories[type].units += members;
+            if (card.received) {
+                categories[type].distributed++;
+            } else {
+                pendingMembers += members;
+            }
+        });
+
+        // Calculate Averages and Requirements
+        const avgFamilySize = (totalMembers / totalFamilies).toFixed(1);
+        const pendingWheat = pendingMembers * 2;
+        const pendingRice = pendingMembers * 3;
+
+        // Build Table Rows
+        let tableRows = '';
+        for (let type in categories) {
+            const cat = categories[type];
+            if (cat.total > 0 || type !== 'BPL') {
+                const pending = cat.total - cat.distributed;
+                tableRows += `
+                    <tr style="border-bottom: 1px solid #f1f5f9;">
+                        <td style="padding: 12px; font-weight: 600; color: #1e293b;">${type}</td>
+                        <td style="padding: 12px; text-align: center;">${cat.total}</td>
+                        <td style="padding: 12px; text-align: center; color: #16a34a; font-weight: 600;">${cat.distributed}</td>
+                        <td style="padding: 12px; text-align: center; color: #e11d48; font-weight: 600;">${pending}</td>
+                        <td style="padding: 12px; text-align: center;">${cat.units}</td>
+                    </tr>
+                `;
+            }
+        }
+
+        // Calculate Stock properties for the Stock progress bars
+        let totalUnits = 0;
+        let distributedUnits = 0;
+        rationCards.forEach(card => {
+            const members = parseInt(card.members) || 0;
+            totalUnits += members;
+            if (card.received) {
+                distributedUnits += members;
+            }
+        });
+
+        const totalWheat = totalUnits * 2;
+        const distWheat = distributedUnits * 2;
+        const availWheat = totalWheat - distWheat;
+
+        const totalRice = totalUnits * 3;
+        const distRice = distributedUnits * 3;
+        const availRice = totalRice - distRice;
+
+        const getStatusProps = (avail, total) => {
+            if (total === 0) return { pct: 0, color: '#16a34a', bg: '#dcfce7', textClass: '#166534', label: 'Good' };
+            const pct = Math.round((avail / total) * 100);
+            if (pct > 50) return { pct, color: '#16a34a', bg: '#dcfce7', textClass: '#166534', label: 'Good' };
+            if (pct > 20) return { pct, color: '#f59e0b', bg: '#ffedd5', textClass: '#c2410c', label: 'Low' };
+            return { pct, color: '#ef4444', bg: '#fee2e2', textClass: '#b91c1c', label: 'Critical' };
+        };
+
+        const wp = getStatusProps(availWheat, totalWheat);
+        const rp = getStatusProps(availRice, totalRice);
+
+        // Hide Dashboard elements
+        if (dashboardStats) dashboardStats.classList.add('hidden');
+        if (searchCard) searchCard.classList.add('hidden');
+        if (searchResultDisplay) searchResultDisplay.classList.add('hidden');
+
+        // Show Analysis element and populate HTML
+        analysisPage.classList.remove('hidden');
+        
+        analysisPage.innerHTML = `
+            <div class="analysis-page-container" style="background: white; padding: 30px; border-radius: 12px; border: 1px solid #eef2f5; box-shadow: 0 4px 15px rgba(0,0,0,0.02);">
+                <h2 style="margin-top: 0; color: #0f172a; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px; margin-bottom: 25px; font-weight: 800;">📊 Village Distribution Analytics</h2>
+                
+                <!-- KPI Widgets Grid -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-bottom: 25px;">
+                    <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(22,163,74,0.03);">
+                        <div style="font-size: 0.9rem; color: #166534; font-weight: 700; margin-bottom: 8px;">Ration Distribution Progress</div>
+                        <div style="font-size: 2.2rem; font-weight: 800; color: #14532d; line-height: 1.1; margin-bottom: 5px;">${distPct}%</div>
+                        <div style="font-size: 0.8rem; color: #15803d; font-weight: 500;">${distributedFamilies} of ${totalFamilies} families completed</div>
+                    </div>
+                    <div style="background: #eff6ff; border: 1px solid #bfdbfe; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(37,99,235,0.03);">
+                        <div style="font-size: 0.9rem; color: #1e40af; font-weight: 700; margin-bottom: 8px;">Biometric Verification Rate</div>
+                        <div style="font-size: 2.2rem; font-weight: 800; color: #1e3a8a; line-height: 1.1; margin-bottom: 5px;">${fingerPct}%</div>
+                        <div style="font-size: 0.8rem; color: #1d4ed8; font-weight: 500;">${fingerScannedFamilies} of ${totalFamilies} families scanned</div>
+                    </div>
+                </div>
+
+                <!-- Table & Requirements Grid -->
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 25px; margin-bottom: 30px;" class="analysis-mid-row">
+                    <!-- Category Breakdown Table -->
+                    <div>
+                        <h3 style="font-size: 1.15rem; color: #1e293b; margin-top: 0; margin-bottom: 12px; font-weight: 700;">Category Wise Summary</h3>
+                        <div style="overflow-x: auto; border: 1px solid #e2e8f0; border-radius: 8px; background: white;">
+                            <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem; text-align: left;">
+                                <thead style="background-color: #f8fafc; border-bottom: 1px solid #e2e8f0;">
+                                    <tr>
+                                        <th style="padding: 12px 15px;">Card Type</th>
+                                        <th style="padding: 12px 15px; text-align: center;">Total Cards</th>
+                                        <th style="padding: 12px 15px; text-align: center;">Distributed</th>
+                                        <th style="padding: 12px 15px; text-align: center;">Pending</th>
+                                        <th style="padding: 12px 15px; text-align: center;">Total Units</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${tableRows}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Requirements Summary -->
+                    <div>
+                        <h3 style="font-size: 1.15rem; color: #1e293b; margin-top: 0; margin-bottom: 12px; font-weight: 700;">Allocation Requirements</h3>
+                        <div style="background: #fafaf9; border: 1px solid #e7e5e4; padding: 20px; border-radius: 8px; font-size: 0.95rem; line-height: 1.8; color: #475569; display: flex; flex-direction: column; gap: 10px; box-shadow: inset 0 1px 2px rgba(0,0,0,0.01);">
+                            <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #e7e5e4; padding-bottom: 6px;">
+                                <span>Average Family Size:</span>
+                                <strong style="color: #1e293b;">${avgFamilySize} members</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #e7e5e4; padding-bottom: 6px;">
+                                <span>Pending Wheat Req:</span>
+                                <strong style="color: #991b1b;">${pendingWheat} Kg</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>Pending Rice Req:</span>
+                                <strong style="color: #1d4ed8;">${pendingRice} Kg</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3 Graphs/Widgets Section -->
+                <h3 style="font-size: 1.3rem; color: #0f172a; margin-top: 40px; margin-bottom: 20px; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px; font-weight: 800;">📈 Analytical Insights & Stock Status</h3>
+                
+                <div class="dashboard-grid" style="margin-top: 15px;">
+                    
+                    <!-- Col 1: Distribution Trend -->
+                    <div class="dashboard-card" style="box-shadow: 0 4px 6px rgba(0,0,0,0.01); border: 1px solid #e2e8f0;">
+                        <div class="dashboard-card-header">
+                            <h3 style="font-size: 1.1rem; font-weight: 700;">Distribution Trend <span style="color:#64748b; font-size: 0.85rem; font-weight: normal;">(Daily)</span></h3>
+                            <select>
+                                <option>This Month</option>
+                            </select>
+                        </div>
+                        <div class="trend-chart-container">
+                            <canvas id="distribution-trend-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Col 2: Stock Status -->
+                    <div class="dashboard-card" style="box-shadow: 0 4px 6px rgba(0,0,0,0.01); border: 1px solid #e2e8f0;">
+                        <div class="dashboard-card-header" style="margin-bottom: 20px;">
+                            <h3 style="margin:0; font-size: 1.1rem; font-weight: 700;">Stock Status</h3>
+                        </div>
+                        
+                        <div class="stock-status-list">
+                            <!-- Table Header -->
+                            <div class="stock-status-header">
+                                <div style="flex: 2;">Items</div>
+                                <div style="flex: 3;">Available</div>
+                                <div style="flex: 1; text-align: center;">Status</div>
+                            </div>
+                            
+                            <!-- Row: Wheat -->
+                            <div class="stock-status-row">
+                                <div class="stock-status-item-name">Wheat</div>
+                                <div class="stock-status-bar-container">
+                                    <div class="stock-status-bar-bg">
+                                        <div class="stock-status-bar-fill" style="width: ${wp.pct}%; background: ${wp.color};"></div>
+                                    </div>
+                                    <div class="stock-status-bar-val">${availWheat} Kg</div>
+                                </div>
+                                <div class="stock-status-badge-container">
+                                    <span class="stock-status-badge" style="background: ${wp.bg}; color: ${wp.textClass};">${wp.label}</span>
+                                </div>
+                            </div>
+
+                            <!-- Row: Rice -->
+                            <div class="stock-status-row">
+                                <div class="stock-status-item-name">Rice</div>
+                                <div class="stock-status-bar-container">
+                                    <div class="stock-status-bar-bg">
+                                        <div class="stock-status-bar-fill" style="width: ${rp.pct}%; background: ${rp.color};"></div>
+                                    </div>
+                                    <div class="stock-status-bar-val">${availRice} Kg</div>
+                                </div>
+                                <div class="stock-status-badge-container">
+                                    <span class="stock-status-badge" style="background: ${rp.bg}; color: ${rp.textClass};">${rp.label}</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="stock-view-btn" id="analysis-view-stock-btn">
+                            <span>📄</span> View Stock Details
+                        </button>
+                    </div>
+
+                    <!-- Col 3: Category Chart -->
+                    <div class="dashboard-card" style="box-shadow: 0 4px 6px rgba(0,0,0,0.01); border: 1px solid #e2e8f0;">
+                        <div class="dashboard-card-header" style="margin-bottom: 20px;">
+                            <h3 style="margin:0; font-size: 1.1rem; font-weight: 700;">Distribution by Category <span style="color:#64748b; font-size: 0.85rem; font-weight: normal;">(This Month)</span></h3>
+                        </div>
+                        <div class="category-doughnut-container">
+                            <div class="category-canvas-wrapper">
+                                <canvas id="category-doughnut-chart"></canvas>
+                                <div class="category-canvas-inner-label">
+                                    <div class="total-num" id="doughnut-total">0</div>
+                                    <div class="total-lbl">Total Families</div>
+                                </div>
+                            </div>
+                            <div class="category-legend-list">
+                                <div class="category-legend-row">
+                                    <div class="category-legend-label">
+                                        <div class="category-legend-dot" style="background-color: #16a34a;"></div>
+                                        <span>Antyodaya (AAY)</span>
+                                    </div>
+                                    <strong class="category-legend-val" id="legend-aay">0 (0%)</strong>
+                                </div>
+                                <div class="category-legend-row">
+                                    <div class="category-legend-label">
+                                        <div class="category-legend-dot" style="background-color: #2563eb;"></div>
+                                        <span>Priority Household (PHH)</span>
+                                    </div>
+                                    <strong class="category-legend-val" id="legend-phh">0 (0%)</strong>
+                                </div>
+                                <div class="category-legend-row">
+                                    <div class="category-legend-label">
+                                        <div class="category-legend-dot" style="background-color: #f59e0b;"></div>
+                                        <span>Other (BPL)</span>
+                                    </div>
+                                    <strong class="category-legend-val" id="legend-bpl">0 (0%)</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn-cancel" id="analysis-view-cat-btn" style="width: 100%; margin-top: auto; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                            <span class="nav-icon">📊</span> View Category Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        // Bind dynamic action buttons
+        const viewStockBtn = document.getElementById('analysis-view-stock-btn');
+        if (viewStockBtn) {
+            viewStockBtn.addEventListener('click', (ev) => {
+                ev.preventDefault();
+                const sidebarStockBtn = document.getElementById('sidebar-stock-btn');
+                if (sidebarStockBtn) sidebarStockBtn.click();
+            });
+        }
+
+        const viewCatBtn = document.getElementById('analysis-view-cat-btn');
+        if (viewCatBtn) {
+            viewCatBtn.addEventListener('click', (ev) => {
+                ev.preventDefault();
+                const sidebarOfficialBtn = document.getElementById('sidebar-official-lists-btn');
+                if (sidebarOfficialBtn) sidebarOfficialBtn.click();
+            });
+        }
+
+        // Add Active Styles to Sidebar
+        if (analysisBtn) analysisBtn.classList.add('active');
+        if (dashboardBtn) dashboardBtn.classList.remove('active');
+
+        // Draw the charts
+        renderTrendChart();
+        renderCategoryWidgets();
+    }
+
+    const analysisBtn = document.getElementById('sidebar-analysis-btn');
+    if (analysisBtn) {
+        analysisBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            showAnalysisView();
+        });
+    }
+
+    // --- Mobile Sidebar Responsive Navigation Drawers ---
+    const mobileSidebarToggle = document.getElementById('mobile-sidebar-toggle');
+    const sidebarCloseBtn = document.getElementById('sidebar-close-btn');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
+    const appSidebar = document.getElementById('app-sidebar');
+
+    function openSidebar() {
+        if (appSidebar && sidebarOverlay) {
+            appSidebar.classList.add('open');
+            sidebarOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent main page scrolling when menu open
+        }
+    }
+
+    function closeSidebar() {
+        if (appSidebar && sidebarOverlay) {
+            appSidebar.classList.remove('open');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    }
+
+    if (mobileSidebarToggle) {
+        mobileSidebarToggle.addEventListener('click', openSidebar);
+    }
+    if (sidebarCloseBtn) {
+        sidebarCloseBtn.addEventListener('click', closeSidebar);
+    }
+    if (sidebarOverlay) {
+        sidebarOverlay.addEventListener('click', closeSidebar);
+    }
+
+    // Close mobile sidebar when clicking on a nav link on mobile view
+    const navItems = document.querySelectorAll('.sidebar-nav .nav-item');
+    navItems.forEach(item => {
+        item.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                closeSidebar();
+            }
+        });
+    });
 
     // --- Initialize Dashboard Execution ---
     fetchCardsFromBackend();

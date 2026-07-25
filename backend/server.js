@@ -59,18 +59,18 @@ app.get('/api/ration-cards', async (req, res) => {
 });
 
 // Update status of a specific ration card
-app.put('/api/ration-cards/:cardNumber', async (req, res) => {
-    const { cardNumber } = req.params;
+app.put('/api/ration-cards/:id', async (req, res) => {
+    const { id } = req.params;
     const { received, fingerScanned, distributionDate } = req.body;
     
     try {
         const queryText = `
             UPDATE ration_cards 
             SET received = $1, finger_scanned = $2, distribution_date = $3
-            WHERE card_number = $4
+            WHERE id = $4
             RETURNING *;
         `;
-        const values = [received, fingerScanned, distributionDate, cardNumber];
+        const values = [received, fingerScanned, distributionDate, parseInt(id, 10)];
         const result = await pool.query(queryText, values);
         
         if (result.rowCount === 0) {
